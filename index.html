@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Agg Editor</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- CodeMirror Core CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/lint/lint.min.css">
+
+  <!-- CodeMirror JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sass/sass.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/shell/shell.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/yaml/yaml.min.js"></script>
+  <!-- simple.min.js WAJIB sebelum rust/toml/vue -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/mode/simple.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/rust/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/toml/toml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/vue/vue.min.js"></script>
+  <!-- Addons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/html-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/css-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/javascript-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closetag.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchtags.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/search/searchcursor.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/brace-fold.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/xml-fold.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/indent-fold.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/comment-fold.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/lint/lint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/lint/javascript-lint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/lint/css-lint.min.js"></script>
+  <!-- Linters -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.13.6/jshint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/csslint/1.0.5/csslint.min.js"></script>
+  <!-- JSZip -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- Prettier -->
+  <script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-babel.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-html.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-typescript.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-markdown.js"></script>
+
+  <!-- Custom CSS (tidak ada Tailwind) -->
+  <link rel="stylesheet" href="Custom.css">
+
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      background: #0f172a;
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* ===== APP LAYOUT ===== */
+    #app {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 5px 12px;
+      background: rgba(30,41,59,0.9);
+      border-bottom: 1px solid #1e293b;
+      flex-shrink: 0;
+      user-select: none;
+      position: relative;
+      z-index: 100;
+    }
+    .nav-left  { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; }
+    .nav-right { display: flex; align-items: center; gap: 6px; }
+    .brand {
+      font-size: 15px; font-weight: 700; margin: 0 6px;
+      background: linear-gradient(90deg, #22d3ee, #818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+    .icon-btn {
+      background: transparent; border: none; color: #94a3b8;
+      padding: 5px 7px; border-radius: 8px; cursor: pointer; font-size: 14px;
+      transition: background .15s, color .15s;
+    }
+    .icon-btn:hover { background: rgba(100,116,139,.25); color: #fff; }
+
+    /* Menu */
+    .menu-group { position: relative; }
+    .menu-btn {
+      background: transparent; border: none; color: #94a3b8;
+      padding: 4px 9px; border-radius: 8px; font-size: 12px; cursor: pointer;
+      transition: background .15s, color .15s; white-space: nowrap;
+    }
+    .menu-btn:hover { background: rgba(100,116,139,.25); color: #fff; }
+    .dropdown-menu {
+      display: none; position: absolute; left: 0; top: calc(100% + 4px);
+      min-width: 200px; background: #1e293b;
+      border: 1px solid #334155; border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.45); z-index: 999; padding: 4px 0;
+    }
+    .menu-group:hover .dropdown-menu { display: block; }
+    .dd-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 13px; font-size: 12px; color: #94a3b8;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: background .12s;
+    }
+    .dd-item:hover { background: #334155; color: #fff; }
+    .dd-item i { width: 15px; text-align: center; flex-shrink: 0; }
+    .dd-sep { border: none; border-top: 1px solid #1e293b; margin: 3px 0; }
+    .shortcut {
+      margin-left: auto; font-size: 10px; background: #0f172a;
+      border: 1px solid #334155; border-radius: 4px; padding: 1px 5px; color: #475569;
+    }
+
+    /* Action buttons */
+    .action-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 13px; border-radius: 20px; font-size: 12px;
+      font-weight: 500; border: none; cursor: pointer; color: #fff;
+      transition: opacity .15s, transform .1s; white-space: nowrap;
+    }
+    .action-btn:hover  { opacity: .85; }
+    .action-btn:active { transform: scale(.96); }
+    .btn-new     { background: #2563eb; }
+    .btn-run     { background: #16a34a; }
+    .btn-preview { background: #7c3aed; }
+    .btn-changer { background: #b45309; }
+
+    /* ===== FIND BAR ===== */
+    #findBar {
+      display: none; align-items: center; gap: 6px;
+      padding: 5px 12px; background: rgba(15,23,42,.95);
+      border-bottom: 1px solid #1e293b; flex-shrink: 0;
+    }
+    #findBar.show { display: flex; }
+    .find-input {
+      background: #1e293b; border: 1px solid #334155; border-radius: 20px;
+      padding: 4px 11px; font-size: 12px; color: #e2e8f0; outline: none; width: 150px;
+    }
+    .find-input:focus { border-color: #3b82f6; }
+    .find-btn {
+      background: #1e293b; border: 1px solid #334155; border-radius: 20px;
+      padding: 3px 10px; font-size: 11px; color: #94a3b8; cursor: pointer;
+      transition: background .15s;
+    }
+    .find-btn:hover { background: #334155; color: #fff; }
+    #findCount { font-size: 11px; color: #475569; min-width: 52px; }
+    #closeFindBar {
+      margin-left: auto; background: none; border: none;
+      color: #475569; font-size: 18px; cursor: pointer; line-height: 1;
+    }
+    #closeFindBar:hover { color: #f87171; }
+
+    /* ===== MAIN AREA ===== */
+    #mainArea { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+
+    /* ===== SIDEBAR ===== */
+    #sidebar {
+      width: 230px; min-width: 230px; flex-shrink: 0;
+      display: flex; flex-direction: column;
+      background: rgba(11,17,32,.8);
+      border-right: 1px solid #1e293b;
+      overflow: hidden;
+      transition: width .25s cubic-bezier(.4,0,.2,1),
+                  min-width .25s cubic-bezier(.4,0,.2,1),
+                  opacity .2s;
+    }
+    #sidebar.closed {
+      width: 0 !important; min-width: 0 !important;
+      opacity: 0; pointer-events: none; border-right: none;
+    }
+    .sidebar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 7px 10px; background: rgba(30,41,59,.5);
+      border-bottom: 1px solid #1e293b; flex-shrink: 0;
+    }
+    .sidebar-title {
+      font-size: 10px; font-weight: 700; color: #475569;
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+    #fileList { flex: 1; overflow-y: auto; padding: 3px 0; }
+
+    /* File item */
+    .file-item {
+      display: flex; align-items: center; gap: 7px;
+      padding: 5px 10px 5px 11px; margin: 1px 5px; border-radius: 7px;
+      cursor: pointer; font-size: 11.5px; color: #64748b;
+      border-left: 3px solid transparent;
+      transition: background .12s, color .12s;
+    }
+    .file-item:hover  { background: rgba(30,41,59,.7); color: #cbd5e1; }
+    .file-item.active { background: #1d4ed8; color: #fff; border-left-color: #60a5fa; }
+    .file-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-actions { display: none; gap: 2px; }
+    .file-item:hover .file-actions { display: flex; }
+    .file-action-btn {
+      background: transparent; border: none; cursor: pointer;
+      color: #475569; font-size: 11px; padding: 2px 4px; border-radius: 4px;
+    }
+    .file-action-btn:hover      { background: rgba(255,255,255,.1); color: #fff; }
+    .file-action-btn.del:hover  { color: #f87171; }
+
+    /* ===== EDITOR AREA ===== */
+    #editorArea { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+    /* Tab bar */
+    #tabBar {
+      display: flex; overflow-x: auto; overflow-y: hidden;
+      background: rgba(11,17,32,.6); border-bottom: 1px solid #1e293b;
+      flex-shrink: 0; min-height: 35px; scrollbar-width: none;
+    }
+    #tabBar::-webkit-scrollbar { display: none; }
+    .tab-item {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 13px; font-size: 11.5px; cursor: pointer;
+      border-right: 1px solid #1e293b; background: #0b1120;
+      color: #475569; white-space: nowrap; user-select: none; flex-shrink: 0;
+      transition: background .12s, color .12s;
+    }
+    .tab-item:hover  { background: #1e293b; color: #94a3b8; }
+    .tab-item.active { background: #1e293b; color: #fff; border-bottom: 2px solid #3b82f6; }
+    .tab-name { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
+    .tab-close { font-size: 14px; color: #334155; cursor: pointer; line-height: 1; }
+    .tab-close:hover { color: #f87171; }
+    .tab-dirty-dot { width: 7px; height: 7px; border-radius: 50%; background: #94a3b8; display: inline-block; }
+
+    /* Editor wrapper */
+    #editorWrapper { flex: 1; position: relative; overflow: hidden; }
+    /* CodeMirror fills container */
+    .CodeMirror {
+      position: absolute !important;
+      top: 0; left: 0; right: 0; bottom: 0;
+      height: 100% !important;
+      font-family: 'Fira Code', 'Consolas', monospace !important;
+      font-size: 13px;
+    }
+
+    /* ===== WELCOME SCREEN ===== */
+    #welcomeScreen {
+      position: absolute; inset: 0; z-index: 10;
+      background: radial-gradient(circle at 30% 20%, #111827, #030712);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .25s;
+    }
+    #welcomeScreen.hidden { opacity: 0; pointer-events: none; }
+    .welcome-inner { text-align: center; animation: fadeUp .4s ease-out; }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .welcome-icon  { font-size: 48px; color: #3b82f6; margin-bottom: 10px; }
+    .welcome-title {
+      font-size: 26px; font-weight: 700;
+      background: linear-gradient(90deg,#22d3ee,#818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+    .welcome-sub  { color: #334155; font-size: 13px; margin-bottom: 18px; }
+    .welcome-btns { display: flex; gap: 10px; justify-content: center; margin-bottom: 22px; }
+    .w-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 500;
+      border: none; cursor: pointer; color: #fff;
+      transition: opacity .15s, transform .1s;
+    }
+    .w-btn:hover { opacity:.85; transform:translateY(-1px); }
+    .w-btn-primary   { background: #2563eb; }
+    .w-btn-secondary { background: #1e293b; }
+    .welcome-keys {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4px 20px; font-size: 11px; color: #334155;
+    }
+    .welcome-keys kbd {
+      background: #1e293b; border: 1px solid #334155; border-radius: 4px;
+      padding: 1px 5px; font-family: monospace; font-size: 10px;
+    }
+
+    /* ===== RESIZE HANDLE ===== */
+    #resizeHandle {
+      width: 4px; background: #1e293b; cursor: col-resize; flex-shrink: 0;
+      transition: background .15s;
+    }
+    #resizeHandle:hover, #resizeHandle.active { background: #3b82f6; }
+
+    /* ===== PREVIEW PANEL ===== */
+    #previewPanel {
+      width: 420px; min-width: 260px; flex-shrink: 0;
+      display: flex; flex-direction: column;
+      background: #0b1120; border-left: 1px solid #1e293b;
+      overflow: hidden;
+      transition: width .22s ease, opacity .2s;
+    }
+    #previewPanel.closed {
+      width: 0 !important; min-width: 0 !important;
+      opacity: 0; pointer-events: none; border-left: none;
+    }
+    .preview-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 10px; background: rgba(30,41,59,.5);
+      border-bottom: 1px solid #1e293b; flex-shrink: 0;
+    }
+    .preview-title {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; color: #64748b;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:.5;transform:scale(1.3);}
+    }
+    .preview-actions { display: flex; gap: 3px; }
+    #previewFrame { flex: 1; width: 100%; border: none; background: #fff; }
+
+    /* ===== STATUS BAR ===== */
+    #statusBar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2px 12px; background: rgba(11,17,32,.95);
+      border-top: 1px solid #1e293b; font-size: 11px; color: #334155; flex-shrink: 0;
+    }
+    .status-left, .status-right { display: flex; align-items: center; gap: 12px; }
+    #statusLang   { color: #60a5fa; }
+    #statusEmmet  { color: #fbbf24; display: none; }
+    #statusEmmet.show { display: inline; }
+    #statusLintErrors {
+      display: none; align-items: center; gap: 3px;
+      padding: 1px 7px; border-radius: 10px; cursor: pointer;
+      background: rgba(248,113,113,.15); border: 1px solid rgba(248,113,113,.3);
+    }
+    #statusLintErrors.show { display: inline-flex; }
+
+    /* ===== TOAST ===== */
+    #toastMsg {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      background: rgba(30,41,59,.95); backdrop-filter: blur(12px);
+      color: #e2e8f0; padding: 7px 22px; border-radius: 20px; font-size: 12.5px;
+      font-weight: 500; z-index: 9999; pointer-events: none; opacity: 0;
+      border: 1px solid #334155; box-shadow: 0 4px 16px rgba(0,0,0,.4);
+      transition: opacity .2s; white-space: nowrap;
+    }
+
+    /* ===== MODALS ===== */
+    .modal-wrap {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      align-items: center; justify-content: center; padding: 14px;
+    }
+    .modal-wrap.show { display: flex; }
+    .modal-overlay  { position: absolute; inset: 0; background: rgba(0,0,0,.65); backdrop-filter: blur(3px); }
+    .modal-box {
+      position: relative; z-index: 1; background: #1e293b;
+      border: 1px solid #334155; border-radius: 14px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.5); padding: 20px; width: 100%;
+    }
+    .modal-box.sm  { max-width: 360px; }
+    .modal-box.md  { max-width: 440px; }
+    .modal-box.lg  { max-width: 640px; max-height: 88vh; overflow-y: auto; }
+    .modal-title   { font-size: 14px; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
+    .modal-msg     { font-size: 12px; color: #64748b; margin-bottom: 16px; }
+    .modal-footer  { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+    .btn-cancel {
+      padding: 6px 15px; background: #334155; border: none;
+      border-radius: 20px; font-size: 12px; color: #94a3b8; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-cancel:hover { background: #475569; }
+    .btn-ok {
+      padding: 6px 15px; background: #2563eb; border: none;
+      border-radius: 20px; font-size: 12px; color: #fff;
+      font-weight: 600; cursor: pointer; transition: background .15s;
+    }
+    .btn-ok:hover { background: #1d4ed8; }
+    .form-label { display: block; font-size: 11.5px; color: #64748b; font-weight: 500; margin-bottom: 5px; }
+    .form-group { margin-bottom: 13px; }
+    .form-input {
+      width: 100%; background: #0f172a; border: 1px solid #334155;
+      border-radius: 8px; padding: 7px 11px; font-size: 12px; color: #f1f5f9;
+      outline: none; transition: border-color .15s;
+    }
+    .form-input:focus { border-color: #3b82f6; }
+    .checkbox-row  { display: flex; gap: 16px; }
+    .checkbox-label { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; cursor: pointer; }
+    .pos-btn {
+      width: 100%; text-align: left; padding: 9px 12px;
+      background: #0f172a; border: 1px solid #1e293b; border-radius: 7px;
+      font-size: 12px; color: #94a3b8; cursor: pointer; margin-bottom: 6px;
+      transition: background .12s;
+    }
+    .pos-btn:hover { background: #1e293b; color: #fff; }
+
+    /* Light theme */
+    body.light { background: #f1f5f9; color: #0f172a; }
+    body.light #navbar, body.light #sidebar,
+    body.light #statusBar, body.light .modal-box { background: rgba(255,255,255,.9); }
+    body.light .CodeMirror { background: #fff !important; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #0b1120; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+
+    /* CodeMirror overrides */
+    .CodeMirror-gutters    { background: #0b1120 !important; border-right: 1px solid #1e293b !important; }
+    .CodeMirror-linenumber { color: #1e3a5f !important; }
+    .CodeMirror-cursor     { border-left-color: #60a5fa !important; }
+    .CodeMirror-activeline-background { background: rgba(59,130,246,.06) !important; }
+    .CodeMirror-lint-mark-error   { border-bottom: 2px wavy #f87171; }
+    .CodeMirror-lint-mark-warning { border-bottom: 2px wavy #fbbf24; }
+    .cm-pair-colorizer-1 { color: #f87171 !important; }
+    .cm-pair-colorizer-2 { color: #fbbf24 !important; }
+    .cm-pair-colorizer-3 { color: #4ade80 !important; }
+    .cm-pair-colorizer-4 { color: #60a5fa !important; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- NAVBAR -->
+  <div id="navbar">
+    <div class="nav-left">
+      <button class="icon-btn" id="toggleSidebarBtn" title="Toggle Sidebar (Ctrl+B)">
+        <i id="hamburgerIcon" class="fas fa-bars"></i>
+      </button>
+      <span class="brand"><i class="fas fa-code-branch" style="margin-right:5px"></i>Agg Editor</span>
+
+      <!-- Menu File -->
+      <div class="menu-group">
+        <button class="menu-btn"><i class="fas fa-file-alt" style="margin-right:4px"></i>File</button>
+        <div class="dropdown-menu">
+          <a href="#" id="menuOpenFile"      class="dd-item"><i class="fas fa-file-code"></i>Open File...</a>
+          <a href="#" id="menuOpenFolder"    class="dd-item"><i class="fas fa-folder-open"></i>Open Project Folder...</a>
+          <a href="#" id="menuSaveToFolder"  class="dd-item"><i class="fas fa-save"></i>Save to Folder...</a>
+          <hr class="dd-sep">
+          <a href="#" id="menuImport"        class="dd-item"><i class="fas fa-upload"></i>Import File(s)</a>
+          <a href="#" id="menuExportAll"     class="dd-item"><i class="fas fa-archive"></i>Export All (ZIP)</a>
+          <a href="#" id="menuExportCurrent" class="dd-item"><i class="fas fa-download"></i>Export Current</a>
+          <hr class="dd-sep">
+          <a href="#" id="menuSave"          class="dd-item"><i class="fas fa-save"></i>Save <span class="shortcut">Ctrl+S</span></a>
+          <a href="#" id="menuSaveAs"        class="dd-item"><i class="fas fa-copy"></i>Save As</a>
+        </div>
+      </div>
+
+      <!-- Menu Edit -->
+      <div class="menu-group">
+        <button class="menu-btn"><i class="fas fa-edit" style="margin-right:4px"></i>Edit</button>
+        <div class="dropdown-menu">
+          <a href="#" id="menuFormat"  class="dd-item"><i class="fas fa-magic"></i>Format Code <span class="shortcut">Alt+F</span></a>
+          <a href="#" id="menuEmmet"   class="dd-item"><i class="fas fa-bolt"></i>Emmet Expand <span class="shortcut">Tab</span></a>
+          <a href="#" id="menuFind"    class="dd-item"><i class="fas fa-search"></i>Find/Replace <span class="shortcut">Ctrl+H</span></a>
+          <a href="#" id="menuComment" class="dd-item"><i class="fas fa-comment-slash"></i>Toggle Comment <span class="shortcut">Ctrl+/</span></a>
+          <hr class="dd-sep">
+          <a href="#" id="menuUndo"    class="dd-item"><i class="fas fa-undo-alt"></i>Undo <span class="shortcut">Ctrl+Z</span></a>
+          <a href="#" id="menuRedo"    class="dd-item"><i class="fas fa-redo-alt"></i>Redo <span class="shortcut">Ctrl+Y</span></a>
+        </div>
+      </div>
+
+      <!-- Menu View -->
+      <div class="menu-group">
+        <button class="menu-btn"><i class="fas fa-eye" style="margin-right:4px"></i>View</button>
+        <div class="dropdown-menu">
+          <a href="#" id="menuZoomIn"    class="dd-item"><i class="fas fa-search-plus"></i>Zoom In <span class="shortcut">Ctrl++</span></a>
+          <a href="#" id="menuZoomOut"   class="dd-item"><i class="fas fa-search-minus"></i>Zoom Out <span class="shortcut">Ctrl+-</span></a>
+          <a href="#" id="menuZoomReset" class="dd-item"><i class="fas fa-sync-alt"></i>Reset Zoom</a>
+          <hr class="dd-sep">
+          <a href="#" id="menuWordWrap"  class="dd-item"><i class="fas fa-align-left"></i>Word Wrap <span id="wordWrapState" style="font-size:10px;color:#4ade80;margin-left:4px">ON</span></a>
+          <hr class="dd-sep">
+          <a href="#" id="menuFoldAll"   class="dd-item"><i class="fas fa-compress-alt"></i>Fold All</a>
+          <a href="#" id="menuUnfoldAll" class="dd-item"><i class="fas fa-expand-alt"></i>Unfold All</a>
+        </div>
+      </div>
+
+      <!-- Menu Options -->
+      <div class="menu-group">
+        <button class="menu-btn"><i class="fas fa-cog" style="margin-right:4px"></i>Options</button>
+        <div class="dropdown-menu">
+          <a href="#" id="menuDarkTheme"  class="dd-item"><i class="fas fa-moon"></i>Dark Theme</a>
+          <a href="#" id="menuLightTheme" class="dd-item"><i class="fas fa-sun"></i>Light Theme</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button id="newFileBtn"       class="action-btn btn-new"><i class="fas fa-plus"></i> New</button>
+      
+      <button id="codeChangerBtn"   class="action-btn btn-changer"><i class="fas fa-code-branch"></i> Code Changer</button>
+      <input type="file" id="importFileInput" multiple style="display:none"
+        accept=".js,.html,.css,.txt,.json,.md,.ts,.tsx,.jsx,.scss,.sass,.py,.php,.sql,.sh,.bash,.go,.rs,.yaml,.yml,.toml,.vue,.c,.cpp,.cs,.java,.rb,.kt,.swift">
+    </div>
+  </div>
+
+  <!-- FIND BAR -->
+  <div id="findBar">
+    <i class="fas fa-search" style="color:#334155;font-size:12px"></i>
+    <input id="findInput"    type="text" class="find-input" placeholder="Cari...">
+    <i class="fas fa-exchange-alt" style="color:#334155;font-size:12px"></i>
+    <input id="replaceInput" type="text" class="find-input" placeholder="Ganti...">
+    <button id="findPrevBtn"   class="find-btn"><i class="fas fa-chevron-up"></i></button>
+    <button id="findNextBtn"   class="find-btn"><i class="fas fa-chevron-down"></i></button>
+    <button id="replaceOneBtn" class="find-btn">Replace</button>
+    <button id="replaceAllBtn" class="find-btn">All</button>
+    <span id="findCount"></span>
+    <button id="closeFindBar">&times;</button>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div id="mainArea">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title"><i class="fas fa-folder-open" style="margin-right:5px"></i>Explorer</span>
+        <button class="icon-btn" id="newFileSidebarBtn" title="New File" style="font-size:14px;padding:2px 5px">
+          <i class="fas fa-plus-circle"></i>
+        </button>
+      </div>
+      <div id="fileList"></div>
+    </aside>
+
+    <!-- EDITOR -->
+    <div id="editorArea">
+      <div id="tabBar"></div>
+      <div id="editorWrapper">
+        <textarea id="editorTextarea"></textarea>
+
+        <!-- WELCOME SCREEN -->
+        <div id="welcomeScreen">
+          <div class="welcome-inner">
+            <div class="welcome-icon"><i class="fas fa-code-branch"></i></div>
+            <div class="welcome-title">Agg Editor</div>
+            <div class="welcome-sub">Lightweight Web Code Editor</div>
+            <div class="welcome-btns">
+              <button class="w-btn w-btn-primary"   id="welcomeNewFile"><i class="fas fa-plus"></i> New File</button>
+              <button class="w-btn w-btn-secondary"  id="welcomeImport"><i class="fas fa-folder-open"></i> Open File</button>
+            </div>
+            <div class="welcome-keys">
+              <span><kbd>Ctrl+S</kbd> Save</span>
+              <span><kbd>Ctrl+H</kbd> Find</span>
+              <span><kbd>Ctrl+B</kbd> Sidebar</span>
+              <span><kbd>F5</kbd> Preview</span>
+              <span><kbd>Tab</kbd> Emmet</span>
+              <span><kbd>Alt+F</kbd> Format</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESIZE HANDLE -->
+    <div id="resizeHandle"></div>
+
+    <!-- PREVIEW PANEL -->
+    <div id="previewPanel" class="closed"> <!-- default closed, bisa di-toggle -->
+  <div class="preview-header">
+    <div class="preview-title"><i class="fas fa-code-branch"></i> Code Changer</div>
+    <div class="preview-actions">
+      <button class="icon-btn" id="closePreviewBtn" title="Close" style="font-size:17px; padding:2px 6px">&times;</button>
+    </div>
+  </div>
+  <div class="code-changer-panel-content" style="padding: 12px; overflow-y: auto; flex: 1;">
+    <!-- Form Code Changer (diambil dari modal sebelumnya) -->
+    <div class="form-group">
+      <label class="form-label">File target</label>
+      <select id="ccFileSelect" class="form-input">
+        <option value="">-- Pilih file --</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tindakan</label>
+      <div class="checkbox-row">
+        <label class="checkbox-label"><input type="checkbox" id="ccActionAdd"> Tambah</label>
+        <label class="checkbox-label"><input type="checkbox" id="ccActionEdit"> Ubah</label>
+      </div>
+      <div style="font-size:11px;color:#334155;margin-top:4px">Pilih salah satu</div>
+    </div>
+    <div id="ccKeywordContainer" class="form-group hidden">
+      <label class="form-label">Kata kunci (untuk posisi setelah kata kunci)</label>
+      <input type="text" id="ccKeyword" class="form-input" placeholder="Contoh: function, class, dll">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Kode sebelum</label>
+      <textarea id="ccBefore" rows="4" class="form-input" style="font-family:monospace;resize:vertical" placeholder="Kode yang dicari / diubah..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Kode sesudah</label>
+      <textarea id="ccAfter" rows="4" class="form-input" style="font-family:monospace;resize:vertical" placeholder="Kode pengganti / yang ditambahkan..."></textarea>
+    </div>
+    <div class="modal-footer" style="justify-content: space-between;">
+      <button class="btn-cancel" id="ccCancelBtn">Bersihkan</button>
+      <button class="btn-ok" id="ccExecuteBtn">Eksekusi</button>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div id="statusBar">
+    <div class="status-left">
+      <span id="statusFile"><i class="fas fa-file-code" style="margin-right:4px"></i>No file open</span>
+      <span id="statusLang"></span>
+      <span id="statusEmmet"><i class="fas fa-bolt"></i> Emmet</span>
+      <span id="statusLintErrors" title="Lint errors"><i class="fas fa-exclamation-triangle"></i> <span id="lintErrorCount">0</span> error</span>
+    </div>
+    <div class="status-right">
+      <span id="statusCursor">Ln 1, Col 1</span>
+      <span id="statusZoom">100%</span>
+      <span style="color:#1e293b">UTF-8</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toastMsg"></div>
+
+<!-- MODAL: KONFIRMASI -->
+<div id="confirmModal" class="modal-wrap">
+  <div class="modal-overlay"></div>
+  <div class="modal-box sm">
+    <div class="modal-title" id="confirmTitle">Konfirmasi</div>
+    <div class="modal-msg"   id="confirmMessage"></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="confirmCancelBtn">Batal</button>
+      <button class="btn-ok"     id="confirmOkBtn">Ya</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: RENAME -->
+<div id="renameModal" class="modal-wrap">
+  <div class="modal-overlay"></div>
+  <div class="modal-box sm">
+    <div class="modal-title"><i class="fas fa-i-cursor" style="margin-right:6px"></i>Rename File</div>
+    <div class="form-group" style="margin-top:12px">
+      <input id="renameInput" type="text" class="form-input">
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="renameCancelBtn">Batal</button>
+      <button class="btn-ok"     id="renameConfirmBtn">Rename</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CODE CHANGER -->
+<div id="codeChangerModal" class="modal-wrap">
+  <div class="modal-overlay"></div>
+  <div class="modal-box lg" id="ccModalBox">
+    <div class="modal-title" id="ccDragHandle" style="cursor: grab; user-select: none;">
+      <i class="fas fa-code-branch" style="margin-right:6px"></i>Code Changer
+    </div>
+    <div class="form-group">
+      <label class="form-label">File target</label>
+      <select id="ccFileSelect" class="form-input">
+        <option value="">-- Pilih file --</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tindakan</label>
+      <div class="checkbox-row">
+        <label class="checkbox-label"><input type="checkbox" id="ccActionAdd"> Tambah</label>
+        <label class="checkbox-label"><input type="checkbox" id="ccActionEdit"> Ubah</label>
+      </div>
+      <div style="font-size:11px;color:#334155;margin-top:4px">Pilih salah satu</div>
+    </div>
+    <div id="ccKeywordContainer" class="form-group hidden">
+      <label class="form-label">Kata kunci</label>
+      <input type="text" id="ccKeyword" class="form-input" placeholder="Contoh: function, class, dll">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Kode sebelum</label>
+      <textarea id="ccBefore" rows="4" class="form-input" style="font-family:monospace;resize:vertical" placeholder="Kode yang dicari / diubah..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Kode sesudah</label>
+      <textarea id="ccAfter" rows="4" class="form-input" style="font-family:monospace;resize:vertical" placeholder="Kode pengganti / yang ditambahkan..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="ccCancelBtn">Batal</button>
+      <button class="btn-ok"     id="ccExecuteBtn">Eksekusi</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: POSISI TAMBAH -->
+<div id="ccPositionModal" class="modal-wrap">
+  <div class="modal-overlay"></div>
+  <div class="modal-box md">
+    <div class="modal-title">Posisi kode baru</div>
+    <div class="modal-msg">Mau ditempatkan di mana?</div>
+    <button id="ccPosAwal"           class="pos-btn">📄 Di awal file</button>
+    <button id="ccPosAkhir"          class="pos-btn">📄 Di akhir file</button>
+    <button id="ccPosSetelahKeyword" class="pos-btn">🔍 Setelah kata kunci</button>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="ccPosCancelBtn">Batal</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
