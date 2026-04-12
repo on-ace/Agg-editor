@@ -5,167 +5,117 @@
 ![Made With](https://img.shields.io/badge/made%20with-JavaScript-yellow)
 ![No Backend](https://img.shields.io/badge/backend-none-lightgrey)
 
-**Agg Editor** is a lightweight, browser-based code editor designed for fast development without any setup. It supports multiple files, live preview, and modern coding features—all running entirely on the client side.
+**Agg Editor** is a lightweight, fast, and fully browser-based code editor. No installation, no build tools — just open `index.html` and start coding.
+
+It comes with a powerful **Code Changer** panel that helps you quickly add or modify code in any file using flexible search.
 
 ---
 
 ## ✨ Features
 
 ### 📝 Code Editor
-
-* Powered by **CodeMirror 5**
-* Multi-language support:
-
-  * HTML, CSS, JavaScript
-  * TypeScript, JSON
-  * Python, PHP, SQL
-  * Markdown, YAML, and more
-* Syntax highlighting
-* Auto-closing brackets & tags
-* Bracket pair colorization
-
----
+- Powered by **CodeMirror 5**
+- Support for many languages:
+  - HTML, CSS, JavaScript, TypeScript
+  - Python, PHP, SQL, Markdown
+  - JSON, YAML, Go, Rust, Vue, and more
+- Syntax highlighting, auto-close brackets & tags
+- Bracket pair colorization
+- Emmet abbreviation support (HTML & CSS)
+- Code formatting with **Prettier**
 
 ### 📂 File Management
+- Multi-file tabs
+- Create, rename, delete files
+- Import multiple files from your computer
+- Export single file or entire project as ZIP
+- Optional File System Access API support (Chrome/Edge)
 
-* Multi-file editing
-* Create, rename, delete files
-* Import files from your local system
-* Export options:
-
-  * Single file download
-  * Full project as ZIP
-
----
-
-### 🧠 Smart Features
-
-* Emmet support (HTML & CSS)
-* Automatic language detection by file extension
-* Auto-inject CSS & JS into HTML preview
-* Word wrap toggle
-* Adjustable editor zoom
-
----
-
-### 👀 Live Preview
-
-* Real-time preview using iframe
-* Supports:
-
-  * HTML (full rendering)
-  * CSS (basic preview)
-  * JavaScript (console output simulation)
-* Automatically includes unlinked CSS/JS files
-
----
-
-### 💾 Save System
-
-* Save to:
-
-  * Browser memory (localStorage)
-  * File system (if supported by browser)
-* Dirty state indicator (unsaved changes)
-
----
+### 🧠 Smart Tools
+- **Code Changer** panel (Add or Edit code with flexible matching)
+- Live preview (for HTML/CSS/JS)
+- Find & Replace
+- Word wrap toggle
+- Zoom in/out
+- Fold/unfold code
+- Dirty state indicator (unsaved changes)
 
 ### 🎨 UI & UX
+- Beautiful dark theme (with light theme option)
+- Resizable sidebar and preview panel
+- Modern, clean interface
+- Toast notifications
+- Keyboard shortcuts
 
-* Dark & Light theme
-* Sidebar file explorer
-* Tab-based editor
-* Responsive layout
-* Resizable preview panel
-* Toast notifications
-
----
-
-### 🔍 Tools
-
-* Find in file
-* Code formatting (Prettier)
-* Linting (JavaScript & CSS)
-* Keyboard shortcuts
+### 🔧 Code Changer
+- Add new code at the beginning, end, or after a keyword
+- Edit/replace existing code with flexible whitespace matching
+- Works on any open file
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **CodeMirror 5**
-* **Prettier**
-* **JSZip**
-* **Font Awesome**
-* Vanilla JavaScript (no framework)
+- **CodeMirror 5** (core editor)
+- **Prettier** (code formatting)
+- **JSZip** (ZIP export)
+- **Font Awesome**
+- Vanilla JavaScript (no frameworks)
 
 ---
 
 ## 📁 Project Structure
+    Agg-Editor/
+    ├── index.html          # Main HTML file
+    ├── app.js              # All application logic
+    ├── Custom.css          # Custom styling
+    └── README.md
 
-```bash
-project/
-│
-├── index.html     # Main UI
-├── app.js         # Application logic
-└── Custom.css     # Custom styling
-```
+▶️ Getting Started
 
----
+- Download or clone this repository
+- Open the index.html file in your browser (Chrome, Edge, or Opera recommended)
+- Start coding immediately — no installation needed!
 
-## ▶️ Getting Started
+Tip: For best experience and full File System Access support, use Google Chrome or Microsoft Edge.
 
-1. Download or clone this repository
-2. Open `index.html` in your browser
-3. Start coding 🚀
+⌨️ Keyboard Shortcuts
+  
+  Save file = Ctrl + S
+  Find / Replace = Ctrl + H
+  New file = Ctrl + N
+  Format code = Alt + F
+  Toggle Sidebar = Ctrl + B
+  Zoom In = Ctrl + +
+  Zoom Out = Ctrl + -
+  Toggle Comment = Ctrl + /
+  Emmet Expand = Tab (in HTML/CSS)
 
-> No installation or build tools required.
+📦 Export Options
 
----
+  - Export current file (Download)
+  - Export entire project as ZIP
+  - Save directly to folder (using File System Access API)
 
-## ⌨️ Keyboard Shortcuts
+⚠️ Notes
 
-| Action      | Shortcut         |
-| ----------- | ---------------- |
-| Save file   | Ctrl + S         |
-| Find        | Ctrl + F         |
-| New file    | Ctrl + N         |
-| Format code | Ctrl + Shift + F |
+  - This is a 100% client-side application (no backend required)
+  - Files are saved in browser localStorage by default
+  - Full File System integration works best in Chromium-based browsers
+  - Live preview is optimized for HTML, CSS, and JavaScript
 
----
+💡 Future Improvements (Planned)
 
-## 📦 Export Options
+  - Real-time collaboration
+  - Git integration
+  - Built-in terminal
+  - Plugin system
+  - One-click deployment
 
-* Export current file → direct download
-* Export entire project → ZIP file
+👨‍💻 Author
+Built as a lightweight in-browser IDE for quick prototyping and development.
 
----
+📜 License
+This project is licensed under the MIT License — feel free to use, modify, and distribute.
 
-## ⚠️ Notes
-
-* 100% client-side (no backend required)
-* Data is stored in browser (localStorage)
-* File System Access API support depends on browser
-
----
-
-## 💡 Future Improvements
-
-* Git integration
-* Plugin system
-* Real-time collaboration
-* Built-in terminal
-* One-click deployment
-
----
-
-## 👨‍💻 Author
-
-Built as a lightweight **in-browser IDE** for quick development without setup.
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** — feel free to use and modify.
-
----
+Made with ❤️ for fast and simple web development
