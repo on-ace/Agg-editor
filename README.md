@@ -1,121 +1,95 @@
 # 🚀 Agg Editor
 
-![Status](https://img.shields.io/badge/status-active-success)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Made With](https://img.shields.io/badge/made%20with-JavaScript-yellow)
-![No Backend](https://img.shields.io/badge/backend-none-lightgrey)
-
-**Agg Editor** is a lightweight, fast, and fully browser-based code editor. No installation, no build tools — just open `index.html` and start coding.
-
-It comes with a powerful **Code Changer** panel that helps you quickly add or modify code in any file using flexible search.
+**Agg Editor** adalah editor kode berbasis web yang ringan, cepat, dan modern. Dirancang untuk pengembang web yang membutuhkan alat pengeditan cepat tanpa harus membuka IDE yang berat. Dibangun menggunakan teknologi web murni (HTML, CSS, dan Vanilla JavaScript) untuk performa maksimal.
 
 ---
 
-## ✨ Features
+## ✨ Fitur Unggulan
 
-### 📝 Code Editor
-- Powered by **CodeMirror 5**
-- Support for many languages:
-  - HTML, CSS, JavaScript, TypeScript
-  - Python, PHP, SQL, Markdown
-  - JSON, YAML, Go, Rust, Vue, and more
-- Syntax highlighting, auto-close brackets & tags
-- Bracket pair colorization
-- Emmet abbreviation support (HTML & CSS)
-- Code formatting with **Prettier**
+### 💻 Editor Inti
+- **Multi-Language Support**: Dukungan untuk HTML, CSS, JavaScript, TypeScript, PHP, Python, Go, Rust, SQL, dan banyak lagi.
+- **Smart Editing**: Autocomplete, auto-close brackets/tags, dan perataan otomatis (indentation).
+- **Format Code**: Integrasi dengan **Prettier** untuk merapikan kode hanya dengan satu klik (`Alt + F`).
+- **Emmet 2.0**: Penulisan HTML/CSS super cepat menggunakan singkatan Emmet (`Tab`).
+- **Linter Integrations**: Deteksi kesalahan penulisan kode secara real-time untuk JavaScript dan CSS.
 
-### 📂 File Management
-- Multi-file tabs
-- Create, rename, delete files
-- Import multiple files from your computer
-- Export single file or entire project as ZIP
-- Optional File System Access API support (Chrome/Edge)
+### 📁 Manajemen File
+- **Multi-Tab Interface**: Kerjakan beberapa file sekaligus secara efisien.
+- **File System API**: Simpan dan buka file atau folder proyek langsung dari sistem penyimpanan komputer Anda.
+- **Export & Import**: Ekspor seluruh proyek ke dalam format **ZIP** atau impor file secara massal.
+- **Persistent State**: Perubahan Anda tidak akan hilang. Data disimpan secara otomatis di penyimpanan lokal browser.
 
-### 🧠 Smart Tools
-- **Code Changer** panel (Add or Edit code with flexible matching)
-- Live preview (for HTML/CSS/JS)
-- Find & Replace
-- Word wrap toggle
-- Zoom in/out
-- Fold/unfold code
-- Dirty state indicator (unsaved changes)
+### 🛠️ Fitur Khusus: Code Changer
+- **Flexible Code Manipulation**: Menambah atau mengubah blok kode di beberapa file dengan cerdas.
+- **Smart Matching**: Mencari kode dengan mengabaikan perbedaan spasi, tab, maupun komentar kode.
+- **Highlight Result**: Hasil perubahan kode otomatis diseleksi/diblok dan layar akan diarahkan langsung ke posisi perubahan.
 
-### 🎨 UI & UX
-- Beautiful dark theme (with light theme option)
-- Resizable sidebar and preview panel
-- Modern, clean interface
-- Toast notifications
-- Keyboard shortcuts
+### 🎨 Antarmuka (UI/UX)
+- **Responsive Layout**: Sidebar dan Preview Panel yang dapat diubah ukurannya (resizable).
+- **Rich Aesthetics**: Desain gelap premium dengan aksen warna modern. Tersedia juga tema terang.
+- **Smart Notifications**: Sistem Toast berwarna (Hijau: Sukses, Merah: Error) di pojok kanan bawah.
 
-### 🔧 Code Changer
-- Add new code at the beginning, end, or after a keyword
-- Edit/replace existing code with flexible whitespace matching
-- Works on any open file
+---
+
+## 📂 Struktur Proyek
+
+Proyek ini menggunakan arsitektur modular untuk memudahkan pemeliharaan kode:
+
+```text
+agg-editor/
+├── index.html            # Struktur utama UI dan modal
+├── README.md             # Dokumentasi proyek
+└── assets/
+    ├── css/
+    │   ├── main.css      # Desain sistem, layout, dan komponen UI
+    │   └── custom.css    # Penyesuaian gaya kustom user
+    └── js/
+        ├── state.js      # Manajemen data global dan persistensi (var global)
+        ├── utils.js      # Helper umum (toast, konfirmasi, deteksi bahasa)
+        ├── ui.js         # Logika rendering tab, daftar file, dan sidebar
+        ├── features.js   # Fitur lanjutan (Emmet, Search, Code Changer)
+        └── app.js        # Entry point utama dan inisialisasi editor
+```
+
+---
+
+## ⌨️ Shortcut Keyboard
+
+Optimalkan produktivitas Anda dengan pintasan berikut:
+
+| Shortcut | Aksi |
+| --- | --- |
+| `Ctrl + S` | Simpan file saat ini |
+| `Alt + F` | Rapikan kode (Format Code) |
+| `Tab` | Perluas singkatan Emmet |
+| `Ctrl + B` | Buka/Tutup Sidebar Explorer |
+| `Ctrl + H` | Buka panel Find & Replace |
+| `Ctrl + /` | Beri/Hapus Komentar (Toggle Comment) |
+| `Ctrl + + / -` | Zoom In / Zoom Out |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **CodeMirror 5** (core editor)
-- **Prettier** (code formatting)
-- **JSZip** (ZIP export)
-- **Font Awesome**
-- Vanilla JavaScript (no frameworks)
+- **CodeMirror 5**: Mesin editor inti.
+- **JSZip**: Untuk fungsionalitas ekspor proyek ke ZIP.
+- **Prettier**: Mesin pemformat kode otomatis.
+- **FontAwesome 6**: Ikonografi modern.
+- **JSHint & CSSLint**: Validasi kode di dalam editor.
 
 ---
 
-## 📁 Project Structure
-    Agg-Editor/
-    ├── index.html          # Main HTML file
-    ├── app.js              # All application logic
-    ├── Custom.css          # Custom styling
-    └── README.md
+## 🚀 Cara Penggunaan
 
-▶️ Getting Started
+1. **Clone/Download** repositori ini.
+2. Buka `index.html` langsung di browser favorit Anda (atau gunakan ekstensi Live Server di VS Code).
+3. Anda bisa langsung membuat file baru melalui sidebar atau membuka folder proyek lokal Anda menggunakan menu **File > Open Project Folder**.
 
-- Download or clone this repository
-- Open the index.html file in your browser (Chrome, Edge, or Opera recommended)
-- Start coding immediately — no installation needed!
+---
 
-Tip: For best experience and full File System Access support, use Google Chrome or Microsoft Edge.
+## 📝 Catatan Pemeliharaan
 
-⌨️ Keyboard Shortcuts
-  
-  Save file = Ctrl + S
-  Find / Replace = Ctrl + H
-  New file = Ctrl + N
-  Format code = Alt + F
-  Toggle Sidebar = Ctrl + B
-  Zoom In = Ctrl + +
-  Zoom Out = Ctrl + -
-  Toggle Comment = Ctrl + /
-  Emmet Expand = Tab (in HTML/CSS)
+Jika Anda ingin memodifikasi folder `js/`, harap perhatikan bahwa variabel state global seperti `files`, `editor`, dan `activeFileId` berada di `state.js` dan diekspor ke objek `window`. Gunakan modifikasi array in-place (`splice`) untuk memastikan perubahan tersinkronisasi di semua modul.
 
-📦 Export Options
-
-  - Export current file (Download)
-  - Export entire project as ZIP
-  - Save directly to folder (using File System Access API)
-
-⚠️ Notes
-
-  - This is a 100% client-side application (no backend required)
-  - Files are saved in browser localStorage by default
-  - Full File System integration works best in Chromium-based browsers
-  - Live preview is optimized for HTML, CSS, and JavaScript
-
-💡 Future Improvements (Planned)
-
-  - Real-time collaboration
-  - Git integration
-  - Built-in terminal
-  - Plugin system
-  - One-click deployment
-
-👨‍💻 Author
-Built as a lightweight in-browser IDE for quick prototyping and development.
-
-📜 License
-This project is licensed under the MIT License — feel free to use, modify, and distribute.
-
-Made with ❤️ for fast and simple web development
+---
+*Dibuat dengan ❤️ untuk developer produktif.*
